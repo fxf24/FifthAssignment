@@ -40,4 +40,5 @@ public class Fragment1 extends Fragment {
         lv1.setAdapter(arrayAdapter);
     }
 
+
 }

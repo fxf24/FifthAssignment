@@ -5,8 +5,80 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <TextView
+    <TableLayout
+        android:stretchColumns="*"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="test" />
+        android:layout_height="match_parent">
+        <TableRow>
+            <TextView
+                android:textSize="20dp"
+                android:text="테이블명"/>
+            <TextView
+                android:id="@+id/table_name"
+                android:textSize="20dp"
+                android:layout_span="2"
+                android:text="사과 테이블"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:textSize="20dp"
+                android:text="입장시간"/>
+            <TextView
+                android:id="@+id/set_time"
+                android:textSize="20dp"
+                android:layout_span="2"
+                android:text="사과 테이블"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:textSize="20dp"
+                android:text="스파게티"/>
+            <TextView
+                android:id="@+id/spaghetti"
+                android:textSize="20dp"
+                android:layout_span="2"
+                android:text="사과 테이블"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:textSize="20dp"
+                android:text="피자"/>
+            <TextView
+                android:id="@+id/pizza"
+                android:textSize="20dp"
+                android:layout_span="2"
+                android:text="사과 테이블"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:textSize="20dp"
+                android:text="멤버쉽"/>
+            <TextView
+                android:id="@+id/membership"
+                android:textSize="20dp"
+                android:layout_span="2"
+                android:text="사과 테이블"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:textSize="20dp"
+                android:text="가격"/>
+            <TextView
+                android:id="@+id/price"
+                android:textSize="20dp"
+                android:layout_span="2"
+                android:text="0원"/>
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/new_order"
+                android:text="새주문"/>
+            <Button
+                android:id="@+id/edit_info"
+                android:text="정보수정"/>
+            <Button
+                android:id="@+id/reset"
+                android:text="초기화"/>
+        </TableRow>
+    </TableLayout>
 </LinearLayout>
