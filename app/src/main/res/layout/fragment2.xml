@@ -11,59 +11,71 @@
         android:layout_height="match_parent">
         <TableRow>
             <TextView
+                android:textColor="#000000"
                 android:textSize="20dp"
                 android:text="테이블명"/>
             <TextView
+                android:textColor="#000000"
                 android:id="@+id/table_name"
                 android:textSize="20dp"
                 android:layout_span="2"
-                android:text="사과 테이블"/>
+                android:text=""/>
         </TableRow>
         <TableRow>
             <TextView
+                android:textColor="#000000"
                 android:textSize="20dp"
                 android:text="입장시간"/>
             <TextView
+                android:textColor="#000000"
                 android:id="@+id/set_time"
                 android:textSize="20dp"
                 android:layout_span="2"
-                android:text="사과 테이블"/>
+                android:text=""/>
         </TableRow>
         <TableRow>
             <TextView
+                android:textColor="#000000"
                 android:textSize="20dp"
                 android:text="스파게티"/>
             <TextView
+                android:textColor="#000000"
                 android:id="@+id/spaghetti"
                 android:textSize="20dp"
                 android:layout_span="2"
-                android:text="사과 테이블"/>
+                android:text=""/>
         </TableRow>
         <TableRow>
             <TextView
+                android:textColor="#000000"
                 android:textSize="20dp"
                 android:text="피자"/>
             <TextView
+                android:textColor="#000000"
                 android:id="@+id/pizza"
                 android:textSize="20dp"
                 android:layout_span="2"
-                android:text="사과 테이블"/>
+                android:text=""/>
         </TableRow>
         <TableRow>
             <TextView
+                android:textColor="#000000"
                 android:textSize="20dp"
                 android:text="멤버쉽"/>
             <TextView
+                android:textColor="#000000"
                 android:id="@+id/membership"
                 android:textSize="20dp"
                 android:layout_span="2"
-                android:text="사과 테이블"/>
+                android:text=""/>
         </TableRow>
         <TableRow>
             <TextView
+                android:textColor="#000000"
                 android:textSize="20dp"
                 android:text="가격"/>
             <TextView
+                android:textColor="#000000"
                 android:id="@+id/price"
                 android:textSize="20dp"
                 android:layout_span="2"
@@ -71,12 +83,15 @@
         </TableRow>
         <TableRow>
             <Button
+                android:textColor="#000000"
                 android:id="@+id/new_order"
                 android:text="새주문"/>
             <Button
+                android:textColor="#000000"
                 android:id="@+id/edit_info"
                 android:text="정보수정"/>
             <Button
+                android:textColor="#000000"
                 android:id="@+id/reset"
                 android:text="초기화"/>
         </TableRow>

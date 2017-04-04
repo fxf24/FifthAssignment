@@ -3,24 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
-    <fragment
+    <FrameLayout
         android:id="@+id/fragment1"
-        android:name="com.example.qudqj_000.fifth_week_assignment.Fragment1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        tools:layout="@layout/fragment1" />
+        android:layout_weight="1">
+
+        <fragment
+            android:name="com.example.qudqj_000.fifth_week_assignment.Fragment1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment1" />
+    </FrameLayout>
 
 
-    <fragment
+    <FrameLayout
         android:id="@+id/fragment2"
-        android:name="com.example.qudqj_000.fifth_week_assignment.Fragment2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        tools:layout="@layout/fragment2" />
+        android:layout_weight="1">
 
+        <fragment
+            android:name="com.example.qudqj_000.fifth_week_assignment.Fragment2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment2" />
+
+    </FrameLayout>
 </LinearLayout>
