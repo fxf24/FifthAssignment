@@ -24,31 +24,20 @@ public class MainActivity extends AppCompatActivity{
 }
 
 class Data{
-    private String tablename;
     private String set_time;
     private int pizza;
     private int spaghetti;
     private String membership;
-    private String price;
+    private int price;
 
     Data(){}
 
-    Data(String tablename, String set_time, int pizza, int spaghetti, String membership, String price){
-        this.tablename = tablename;
+    Data(String set_time, int pizza, int spaghetti, String membership, int price){
         this.set_time = set_time;
         this.pizza = pizza;
         this.spaghetti = spaghetti;
         this.membership = membership;
         this.price = price;
-    }
-
-
-    public String getTablename() {
-        return tablename;
-    }
-
-    public void setTablename(String tablename) {
-        this.tablename = tablename;
     }
 
     public String getSet_time() {
@@ -83,11 +72,11 @@ class Data{
         this.membership = membership;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

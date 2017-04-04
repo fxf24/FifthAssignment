@@ -66,6 +66,7 @@ public class Fragment1 extends Fragment {
                             Fragment2 f2 = Fragment2.newInstance("사과 테이블");
                             tr.replace(R.id.fragment2, f2, "사과");
                             tr.commit();
+                            arrayList.set(0,"사과 table");
                         }
                         break;
                     case 1:

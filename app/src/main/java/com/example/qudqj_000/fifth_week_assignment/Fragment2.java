@@ -1,13 +1,19 @@
 package com.example.qudqj_000.fifth_week_assignment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by qudqj_000 on 2017-03-30.
@@ -16,6 +22,8 @@ import android.widget.TextView;
 public class Fragment2 extends Fragment {
     TextView t1, t2, t3, t4, t5, t6;
     Button b1, b2, b3;
+    Data data;
+    int price;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,7 +48,7 @@ public class Fragment2 extends Fragment {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                setOrder();
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
@@ -82,12 +90,58 @@ public class Fragment2 extends Fragment {
         t1.setText(name);
     }
 
+    void setOrder(){
+        data = new Data();
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd HH:mm");
+        String format = sdf.format(date);
+        data.setSet_time(format);
+
+        View view = getActivity().getLayoutInflater().inflate(R.layout.custom_dialog, null);
+        final EditText sp = (EditText)view.findViewById(R.id.spaghettiNum);
+        final EditText pz = (EditText)view.findViewById(R.id.pizzaNum);
+        final String[] membership = {"기본멤버쉽","VIP멤버쉽"};
+
+        AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+        dlg.setTitle("새 주문")
+                .setView(view)
+                .setIcon(R.mipmap.ic_launcher)
+                .setSingleChoiceItems(membership, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        data.setMembership(membership[which]);
+                    }
+                })
+                .setPositiveButton("닫기", null)
+                .setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String s = sp.getText().toString();
+                        String p = pz.getText().toString();
+                        int spa = Integer.parseInt(s);
+                        int piz = Integer.parseInt(p);
+                        data.setSpaghetti(spa);
+                        data.setPizza(piz);
+                    }
+                })
+                .create();
+        price = 10000*data.getSpaghetti()+12000*data.getPizza();
+//        if(data.getMembership().equals("기본멤버쉽")){
+//            price = (price/10)*9;
+//        }
+//        else{
+//            price = (price/10)*7;
+//        }
+        data.setPrice(price);
+
+        setText(data);
+    }
     public void setText(Data data){
-        t1.setText(data.getTablename());
         t2.setText(data.getSet_time());
-        t3.setText(data.getSpaghetti());
-        t4.setText(data.getPizza());
+        t3.setText(String.valueOf(data.getSpaghetti()));
+        t4.setText(String.valueOf(data.getPizza()));
         t5.setText(data.getMembership());
-        t6.setText(data.getPrice() + "원");
+        t6.setText(String.valueOf(data.getPrice()) + "원");
     }
 }
