@@ -1,12 +1,10 @@
 package com.example.qudqj_000.fifth_week_assignment;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +20,9 @@ import java.util.ArrayList;
  */
 
 public class Fragment1 extends Fragment {
-    ArrayList<String> arrayList;
-    ListView lv1;
-    ArrayAdapter<String> arrayAdapter;
+    public static ArrayList<String> arrayList;
+    public static ListView lv1;
+    public static ArrayAdapter<String> arrayAdapter;
 
     @Nullable
     @Override
@@ -32,6 +30,7 @@ public class Fragment1 extends Fragment {
         View frag = inflater.inflate(R.layout.fragment1, container, false);
         lv1 =(ListView)frag.findViewById(R.id.list);
         program();
+        lv1.setAdapter(arrayAdapter);
         return frag;
     }
 
@@ -43,10 +42,10 @@ public class Fragment1 extends Fragment {
 
     void program(){
         arrayList = new ArrayList<>();
-        arrayList.add("사과 table(비어있음)");
-        arrayList.add("포도 table(비어있음)");
-        arrayList.add("키위 table(비어있음)");
-        arrayList.add("자몽 table(비어있음)");
+        arrayList.add("사과 테이블(비어있음)");
+        arrayList.add("포도 테이블(비어있음)");
+        arrayList.add("키위 테이블(비어있음)");
+        arrayList.add("자몽 테이블(비어있음)");
 
 
         arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, arrayList);
@@ -56,43 +55,59 @@ public class Fragment1 extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                String name = parent.getItemAtPosition(position).toString();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction tr = fm.beginTransaction();
 
                 switch(position){
                     case 0:
-                        if(arrayList.get(position).equals("사과 table(비어있음)")) {
-                            Fragment2 f2 = Fragment2.newInstance("사과 테이블");
-                            tr.replace(R.id.fragment2, f2, "사과");
-                            tr.addToBackStack(null);
+                        if(arrayList.get(position).equals("사과 테이블(비어있음)")) {
+                            Fragment2 f2 = Fragment2.newInstance("사과 테이블",0);
+                            tr.replace(R.id.fragment2, f2, "사과 테이블");
                             tr.commit();
-                            arrayList.set(0,"사과 table");
+                            makeToast();
                         }
                         else{
-                            Fragment2 f2 = (Fragment2)getFragmentManager().findFragmentByTag("사과2");
+                            Fragment2 f2 = (Fragment2)getFragmentManager().findFragmentByTag("사과 테이블");
                             tr.replace(R.id.fragment2, f2);
                             tr.commit();
                         }
                         break;
                     case 1:
-                        if(arrayList.get(position).equals("포도 table(비어있음)")) {
-                            Fragment2 f2 = Fragment2.newInstance("포도 테이블");
-                            tr.replace(R.id.fragment2, f2, "포도");
+                        if(arrayList.get(position).equals("포도 테이블(비어있음)")) {
+                            Fragment2 f2 = Fragment2.newInstance("포도 테이블",1);
+                            tr.replace(R.id.fragment2, f2, "포도 테이블");
+                            tr.commit();
+                            makeToast();
+                        }
+                        else{
+                            Fragment2 f2 = (Fragment2)getFragmentManager().findFragmentByTag("포도 테이블");
+                            tr.replace(R.id.fragment2, f2);
                             tr.commit();
                         }
                         break;
                     case 2:
-                        if(arrayList.get(position).equals("키위 table(비어있음)")) {
-                            Fragment2 f2 = Fragment2.newInstance("키위 테이블");
-                            tr.replace(R.id.fragment2, f2, "키위");
+                        if(arrayList.get(position).equals("키위 테이블(비어있음)")) {
+                            Fragment2 f2 = Fragment2.newInstance("키위 테이블",2);
+                            tr.replace(R.id.fragment2, f2, "키위 테이블");
+                            tr.commit();
+                            makeToast();
+                        }
+                        else{
+                            Fragment2 f2 = (Fragment2)getFragmentManager().findFragmentByTag("키위 테이블");
+                            tr.replace(R.id.fragment2, f2);
                             tr.commit();
                         }
                         break;
                     case 3:
-                        if(arrayList.get(position).equals("자몽 table(비어있음)")) {
-                            Fragment2 f2 = Fragment2.newInstance("자몽 테이블");
-                            tr.replace(R.id.fragment2, f2, "자몽");
+                        if(arrayList.get(position).equals("자몽 테이블(비어있음)")) {
+                            Fragment2 f2 = Fragment2.newInstance("자몽 테이블",3);
+                            tr.replace(R.id.fragment2, f2, "자몽 테이블");
+                            tr.commit();
+                            makeToast();
+                        }
+                        else{
+                            Fragment2 f2 = (Fragment2)getFragmentManager().findFragmentByTag("자몽 테이블");
+                            tr.replace(R.id.fragment2, f2);
                             tr.commit();
                         }
                         break;
@@ -101,9 +116,7 @@ public class Fragment1 extends Fragment {
         });
     }
 
-//    void fragControl(){
-//        FragmentManager fm = getFragmentManager();
-//        FragmentTransaction fr = fm.beginTransaction();
-//        Fragment2 f2 = new Fragment2();
-//    }
+    void makeToast(){
+        Toast.makeText(getActivity(), "비어있는 테이블입니다.", Toast.LENGTH_SHORT).show();
+    }
 }

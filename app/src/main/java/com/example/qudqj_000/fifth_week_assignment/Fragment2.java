@@ -1,12 +1,10 @@
 package com.example.qudqj_000.fifth_week_assignment;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.app.AlertDialog;
@@ -17,10 +15,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.example.qudqj_000.fifth_week_assignment.Fragment1.arrayAdapter;
+import static com.example.qudqj_000.fifth_week_assignment.Fragment1.arrayList;
+import static com.example.qudqj_000.fifth_week_assignment.Fragment1.lv1;
 
 /**
  * Created by qudqj_000 on 2017-03-30.
@@ -30,7 +31,7 @@ public class Fragment2 extends DialogFragment {
     TextView t1, t2, t3, t4, t5, t6;
     Button b1, b2, b3;
     Data data = new Data();
-    int price;
+    int price, index;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class Fragment2 extends DialogFragment {
         setAll();
         setTitle();
 
+
         return frag;
     }
 
@@ -62,27 +64,23 @@ public class Fragment2 extends DialogFragment {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                edit_Info();
             }
         });
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                resetTable();
             }
         });
 
     }
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
-    }
-
-    public static Fragment2 newInstance(String title){
+    public static Fragment2 newInstance(String title, int index){
         Fragment2 f2 = new Fragment2();
 
         Bundle args = new Bundle();
+        args.putInt("index",index);
         args.putString("title", title);
         f2.setArguments(args);
 
@@ -92,20 +90,21 @@ public class Fragment2 extends DialogFragment {
         Fragment2 f2 = new Fragment2();
 
         Bundle args = new Bundle();
-        args.putString("setName", data.getTable_name());
+        args.putString("title", data.getTable_name());
         args.putString("setTime", f2.getTime());
         args.putString("membership", data.getMembership());
         args.putInt("pizza", data.getPizza());
         args.putInt("spaghetti", data.getSpaghetti());
         args.putInt("price", data.getPrice());
         f2.setArguments(args);
+
         return f2;
     }
     void setAll(){
 
         Bundle args = getArguments();
         if(args !=null){
-            data.setTable_name(args.getString("setName"));
+            data.setTable_name(args.getString("title"));
             data.setSet_time(args.getString("setTime"));
             data.setMembership(args.getString("membership"));
             data.setPizza(args.getInt("pizza"));
@@ -119,6 +118,7 @@ public class Fragment2 extends DialogFragment {
         String name = "";
         Bundle args = getArguments();
         if(args != null){
+            index = args.getInt("index");
             name = args.getString("title");
         }
         data.setTable_name(name);
@@ -171,14 +171,92 @@ public class Fragment2 extends DialogFragment {
                         FragmentManager fm = getFragmentManager();
                         Fragment2 f2 = Fragment2.newInstance(data);
                         FragmentTransaction tr = fm.beginTransaction();
-                        tr.replace(R.id.fragment2, f2, "사과2");
+                        tr.replace(R.id.fragment2, f2, data.getTable_name());
                         tr.addToBackStack(null);
                         tr.commit();
+                        arrayList.set(index, data.getTable_name());
+                        lv1.setAdapter(arrayAdapter);
+                        Snackbar.make(getView(),"정보가 입력되었습니다.", 1000).setAction("OK", null).show();
                     }
                 })
                 .show();
     }
 
+    void edit_Info(){
+        View view = getActivity().getLayoutInflater().inflate(R.layout.custom_dialog, null);
+        final EditText sp = (EditText)view.findViewById(R.id.spaghettiNum);
+        final EditText pz = (EditText)view.findViewById(R.id.pizzaNum);
+        final RadioButton r1, r2;
+        r1 = (RadioButton)view.findViewById(R.id.general_membership);
+        r2 = (RadioButton)view.findViewById(R.id.VIP_membership);
+
+        sp.setText(String.valueOf(data.getSpaghetti()));
+        pz.setText(String.valueOf(data.getPizza()));
+
+        if(data.getMembership().equals("기본멤버쉽")){
+            r1.setChecked(true);
+        }
+        else{
+            r2.setChecked(true);
+        }
+
+        AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+        dlg.setTitle("새 주문")
+                .setView(view)
+                .setIcon(R.mipmap.ic_launcher)
+                .setPositiveButton("닫기", null)
+                .setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String s = sp.getText().toString();
+                        String p = pz.getText().toString();
+                        int spa = Integer.parseInt(s);
+                        int piz = Integer.parseInt(p);
+                        data.setSpaghetti(spa);
+                        data.setPizza(piz);
+
+                        price = 10000*data.getSpaghetti()+12000*data.getPizza();
+
+                        if(r1.isChecked()){
+                            data.setMembership(r1.getText().toString());
+                        }
+                        else{
+                            data.setMembership(r2.getText().toString());
+                        }
+
+                        if(data.getMembership().equals("기본멤버쉽")){
+                            price = (price/10)*9;
+                        }
+                        else{
+                            price = (price/10)*7;
+                        }
+                        data.setPrice(price);
+
+
+                        FragmentManager fm = getFragmentManager();
+                        Fragment2 f2 = Fragment2.newInstance(data);
+                        FragmentTransaction tr = fm.beginTransaction();
+                        tr.replace(R.id.fragment2, f2, data.getTable_name());
+                        tr.addToBackStack(null);
+                        tr.commit();
+                        arrayList.set(index, data.getTable_name());
+                        lv1.setAdapter(arrayAdapter);
+                        Snackbar.make(getView(),"정보가 입력되었습니다.", 1000).setAction("OK", null).show();
+                    }
+                })
+                .show();
+    }
+
+    void resetTable(){
+        arrayList.set(index, data.getTable_name()+"(비어있음)");
+        FragmentManager fm = getFragmentManager();
+        Fragment2 f2 = new Fragment2();
+        FragmentTransaction tr = fm.beginTransaction();
+        tr.replace(R.id.fragment2, f2, data.getTable_name());
+        tr.addToBackStack(null);
+        tr.commit();
+        lv1.setAdapter(arrayAdapter);
+    }
     String getTime(){
         long now = System.currentTimeMillis();
         Date date = new Date(now);

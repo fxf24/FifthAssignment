@@ -7,9 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    Button b1;
-    Data data;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,14 +18,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.new_order:
-                break;
-            case R.id.edit_info:
-                break;
-            case R.id.reset:
-                break;
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(getFragmentManager().getBackStackEntryCount() != 0) {
+            getFragmentManager().popBackStack();
         }
     }
 }
