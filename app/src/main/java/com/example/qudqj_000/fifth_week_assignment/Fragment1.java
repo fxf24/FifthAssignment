@@ -65,8 +65,14 @@ public class Fragment1 extends Fragment {
                         if(arrayList.get(position).equals("사과 table(비어있음)")) {
                             Fragment2 f2 = Fragment2.newInstance("사과 테이블");
                             tr.replace(R.id.fragment2, f2, "사과");
+                            tr.addToBackStack(null);
                             tr.commit();
                             arrayList.set(0,"사과 table");
+                        }
+                        else{
+                            Fragment2 f2 = (Fragment2)getFragmentManager().findFragmentByTag("사과2");
+                            tr.replace(R.id.fragment2, f2);
+                            tr.commit();
                         }
                         break;
                     case 1:

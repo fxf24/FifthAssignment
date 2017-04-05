@@ -1,15 +1,14 @@
 package com.example.qudqj_000.fifth_week_assignment;
 
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
 
-import java.util.ArrayList;
-
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
+    Button b1;
+    Data data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +20,21 @@ public class MainActivity extends AppCompatActivity{
     void program(){
 
     }
+
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.new_order:
+                break;
+            case R.id.edit_info:
+                break;
+            case R.id.reset:
+                break;
+        }
+    }
 }
 
 class Data{
+    private String table_name;
     private String set_time;
     private int pizza;
     private int spaghetti;
@@ -32,13 +43,9 @@ class Data{
 
     Data(){}
 
-    Data(String set_time, int pizza, int spaghetti, String membership, int price){
-        this.set_time = set_time;
-        this.pizza = pizza;
-        this.spaghetti = spaghetti;
-        this.membership = membership;
-        this.price = price;
-    }
+    public String getTable_name(){return  table_name;}
+
+    public void setTable_name(String table_name){this.table_name = table_name;}
 
     public String getSet_time() {
         return set_time;

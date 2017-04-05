@@ -79,21 +79,22 @@
                 android:id="@+id/price"
                 android:textSize="20dp"
                 android:layout_span="2"
-                android:text="0원"/>
+                android:text=""/>
         </TableRow>
         <TableRow>
             <Button
-                android:textColor="#000000"
                 android:id="@+id/new_order"
+                android:textColor="#000000"
                 android:text="새주문"/>
             <Button
-                android:textColor="#000000"
                 android:id="@+id/edit_info"
+                android:textColor="#000000"
                 android:text="정보수정"/>
             <Button
-                android:textColor="#000000"
                 android:id="@+id/reset"
-                android:text="초기화"/>
+                android:textColor="#000000"
+                android:text="초기화" />
         </TableRow>
+
     </TableLayout>
 </LinearLayout>
