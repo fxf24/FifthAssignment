@@ -13,6 +13,7 @@
             android:text="스파게티 개수"
             android:textColor="#000000"/>
         <EditText
+            android:inputType="number"
             android:id="@+id/spaghettiNum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -27,9 +28,27 @@
             android:text="피자 개수"
             android:textColor="#000000"/>
         <EditText
+            android:inputType="number"
             android:id="@+id/pizzaNum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <RadioGroup
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:layout_weight="1"
+            android:id="@+id/general_membership"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기본멤버쉽"/>
+        <RadioButton
+            android:layout_weight="1"
+            android:id="@+id/VIP_membership"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VIP멤버쉽"/>
+    </RadioGroup>
 
 </LinearLayout>

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -130,18 +131,14 @@ public class Fragment2 extends DialogFragment {
         View view = getActivity().getLayoutInflater().inflate(R.layout.custom_dialog, null);
         final EditText sp = (EditText)view.findViewById(R.id.spaghettiNum);
         final EditText pz = (EditText)view.findViewById(R.id.pizzaNum);
-        final String[] membership = {"기본멤버쉽","VIP멤버쉽"};
+        final RadioButton r1, r2;
+        r1 = (RadioButton)view.findViewById(R.id.general_membership);
+        r2 = (RadioButton)view.findViewById(R.id.VIP_membership);
 
         AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
         dlg.setTitle("새 주문")
                 .setView(view)
                 .setIcon(R.mipmap.ic_launcher)
-                .setSingleChoiceItems(membership, 1, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        data.setMembership(membership[which]);
-                    }
-                })
                 .setPositiveButton("닫기", null)
                 .setNegativeButton("확인", new DialogInterface.OnClickListener() {
                     @Override
@@ -154,6 +151,13 @@ public class Fragment2 extends DialogFragment {
                         data.setPizza(piz);
 
                         price = 10000*data.getSpaghetti()+12000*data.getPizza();
+
+                        if(r1.isChecked()){
+                            data.setMembership(r1.getText().toString());
+                        }
+                        else{
+                            data.setMembership(r2.getText().toString());
+                        }
 
                         if(data.getMembership().equals("기본멤버쉽")){
                             price = (price/10)*9;
@@ -173,7 +177,6 @@ public class Fragment2 extends DialogFragment {
                     }
                 })
                 .show();
-
     }
 
     String getTime(){
